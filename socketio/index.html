@@ -1,0 +1,74 @@
+<!--script src="/socket.io/socket.io.js"></script>
+<script>
+  var socket = io.connect('http://localhost');
+  socket.on('news', function (data) {
+    console.log(data);
+    socket.emit('my other event', { my: 'data' });
+  });
+
+</script>
+<html>
+<head>
+</head>
+<body>
+Welcome, Hello World !!!
+</body>
+</html-->
+
+<!--script src="/socket.io/socket.io.js"></script>
+<script>
+  var socket = io.connect('http://localhost');
+  socket.on('welcome', function (data) {
+    console.log(data);
+    socket.emit('mongo', { my: 'data' });
+  });
+  socket.on('data', function (data) {
+    console.log(data);
+  });	
+</script>
+<html>
+<head>
+</head>
+<body>
+Welcome, Hello World !!!
+</body>
+</html-->
+
+<!--script src="/socket.io/socket.io.js"></script>
+<script>
+  var socket = io.connect('http://localhost');
+  socket.on('welcome', function (data) {
+    console.log(data);
+    socket.emit('redis', { my: 'data' });
+  });
+  socket.on('data', function (data) {
+    console.log(data);
+  });	
+</script>
+<html>
+<head>
+</head>
+<body>
+Welcome, Hello World !!!
+</body>
+</html-->
+
+
+<script src="/socket.io/socket.io.js"></script>
+<script>
+  var socket = io.connect('http://localhost');
+  socket.on('welcome', function (data) {
+    console.log(data);
+    socket.emit('mysql', { my: 'data' });
+  });
+  socket.on('data', function (data) {
+    console.log(data);
+  });	
+</script>
+<html>
+<head>
+</head>
+<body>
+Welcome, Hello World !!!
+</body>
+</html>

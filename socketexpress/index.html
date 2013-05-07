@@ -1,0 +1,42 @@
+<script src="http://localhost:8080/socket.io/socket.io.js"></script>
+<!--script src="/socket.io/socket.io.js"></script-->
+<script>
+// var socket = io.connect('http://localhost');
+ var socket = io.connect('http://localhost:8080');
+ socket.on('connect', function () { // TIP: you can avoid listening on `connect` and listen on events directly too!
+    socket.emit('callback', 'message', function (data) {
+      console.log(data); 
+    });
+    socket.emit('private_message','hemant', { my: 'private message' });
+    socket.emit('set_name','Hemant');
+    socket.send('I am connecting');
+    socket.on('message', function (data) {
+      console.log('Ack From server: '+data);
+    });
+ });
+  socket.on('news', function (data) {
+    console.log(data);
+    socket.emit('news_ack', { my: 'interested' });
+});
+ socket.on('server_broadcast', function (data) {
+    console.log(data);
+});
+  socket.on('user_notification_broadcast', function (data) {
+    console.log(data);
+});
+socket.on('ready', function (data) {
+    console.log("Name set.");
+    socket.emit("msg");	
+});
+ socket.on('push_process', function (data) {
+    console.log(data);
+});
+
+</script>
+<html>
+<head>
+</head>
+<body>
+Welcome, Hello World !!!
+</body>
+</html>

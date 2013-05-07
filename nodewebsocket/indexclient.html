@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset=utf-8>
+<meta name="viewport" content="width=620">
+<title>HTML5 Demo: Web Socket</title>
+<script src="http://code.jquery.com/jquery.min.js"></script>
+</head>
+<body>
+<ul id="log"></ul>
+</body>
+</html>
+<script>
+$(function () {
+
+	log = document.getElementById('log');
+
+    // if user is running mozilla then use it's built-in WebSocket
+    window.WebSocket = window.WebSocket || window.MozWebSocket;
+
+    var connection = new WebSocket('ws://localhost:3232');
+
+    connection.onopen = function () {
+	log.innerHTML = '<li class="them">connection is opened and ready to use</li>' + log.innerHTML;
+    };
+
+    connection.onerror = function (error) {
+        	log.innerHTML = '<li class="them">an error occurred when sending-receiving data</li>' + log.innerHTML;
+    };
+
+    connection.onmessage = function (message) {
+        // try to decode json (I assume that each message from server is json)
+        try {
+		log.innerHTML = '<li class="them">'+message.data+'</li>' + log.innerHTML;
+            //var json = JSON.parse(message.data);
+        } catch (e) {
+            console.log('This doesn\'t look like a valid JSON: ', message.data);
+            return;
+        }
+        // handle incoming message
+    };
+});
+
+</script>
+<!--script>
+var WebSocket = require('ws');
+
+ws = new WebSocket('ws://localhost:3232/');
+
+ws.on('open', function() {
+
+	ws.send('Client Connected');
+
+});
+
+ws.on('message', function(message) {
+
+	console.log('Client received: %s', message);
+
+});
+</script-->
